@@ -22,13 +22,6 @@
 
 #include <math.h>
 
-// reverse enginered object, might change in the future, but does work now ...
-@interface ScreenSaverUserInfo:NSObject
-{}
-+ sharedInstance;
-- (double)idleTime;
-@end
-
 @implementation AntiRSI
 
 // bindings methods
@@ -252,7 +245,7 @@
 	}
 	
 	// get idle time in seconds
-	double idle_time = [[ScreenSaverUserInfo sharedInstance] idleTime];
+	double idle_time = CGEventSourceSecondsSinceLastEventType(kCGEventSourceStateCombinedSessionState, kCGAnyInputEventType);
 	
 	// calculate slack, this gives a sort of 4 history filtered idea. 
 	// Prevents Media players from activating AntiRSI.
